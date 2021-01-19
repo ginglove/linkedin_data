@@ -7,7 +7,7 @@ public class Controller {
     {
         System.out.println("Test");
         demo test=new demo();
-        test.OpenFireFoxAndRun();
+//        test.OpenFireFoxAndRun();
 
     }
 
