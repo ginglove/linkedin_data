@@ -99,6 +99,9 @@ public class demo {
         String UserConnected="";
         String UserUniversityName="";
         String UserUniversityYear="";
+        String UserCurrentJob="";
+        String UserCurrentCompany="";
+
         String e_lnkSeemore= common.Read_Properties_Files(prop_linkedInProfilePage,"lnk_SeeMore");
         String e_lnk_UserURL=common.Read_Properties_Files(prop_linkedInProfilePage, "lnk_UserURL");
         String e_H1UserName=common.Read_Properties_Files(prop_linkedInProfilePage, "h1_NameOfUser");
@@ -109,6 +112,8 @@ public class demo {
         String e_btn_Close=common.Read_Properties_Files(prop_linkedInProfilePage,"btn_Close");
         String e_span_Education_Name_Of_University=common.Read_Properties_Files(prop_linkedInProfilePage,"span_Education_Name_Of_University");
         String e_span_Education_Year=common.Read_Properties_Files(prop_linkedInProfilePage,"span_Education_Year");
+        String e_span_Current_Job=common.Read_Properties_Files(prop_linkedInProfilePage,"span_Current_Job");
+        String e_span_Current_Company=common.Read_Properties_Files(prop_linkedInProfilePage,"span_Current_Company");
 
         common.clickToElement(e_lnkSeemore);
         try {
@@ -145,6 +150,16 @@ public class demo {
             e.printStackTrace();
         }
         ((JavascriptExecutor)driver).executeScript("scroll(0,1300)");
+        if(common.isElementPresent(e_span_Current_Job)==true)
+        {
+            UserCurrentJob=common.getTextOfElement(e_span_Current_Job);
+        }
+        else{}
+        if(common.isElementPresent(e_span_Current_Company)==true)
+        {
+            UserCurrentCompany=common.getTextOfElement(e_span_Current_Company);
+        }
+        else{}
         ((JavascriptExecutor)driver).executeScript("scroll(0,1300)");
         if(common.isElementPresent(e_span_Education_Name_Of_University)==true)
         {
@@ -157,7 +172,7 @@ public class demo {
             System.out.println(UserUniversityYear);
         }
         else{}
-        String[] UserInfor=new String[]{DisplayName,UserURL,UserMobile,UserEmail,UserBirthday,UserConnected,UserUniversityName,UserUniversityYear};
+        String[] UserInfor=new String[]{DisplayName,UserCurrentJob,UserCurrentCompany,UserURL,UserMobile,UserEmail,UserBirthday,UserConnected,UserUniversityName,UserUniversityYear};
         try {
             common.writeDataIntoCSV(filePath,UserInfor);
         } catch (IOException e) {
