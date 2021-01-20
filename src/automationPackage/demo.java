@@ -14,13 +14,14 @@ public class demo {
     public static commons common=new commons(driver);
     public static String prop_linkedInProfilePage = System.getProperty("user.dir") + "/src/automationPackage/Elements/linkedInProfilePage.properties";
     public static String prop_linkedInHomePage=System.getProperty("user.dir")+"/src/automationPackage/Elements/linkedInHomePage.properties";
-    public static String filePath=System.getProperty("user.dir")+"/src/automationPackage/TestData/test.csv";
+    public static String filePath=System.getProperty("user.dir")+"/src/automationPackage/TestData/test.xlsx";
+    public static String fileSheet="LinkedInData";
     public static void main(String[] args){
         String chromedriver_linux64=System.getProperty("user.dir")+"/Addons/chromedriver_linux64/chromedriver";
         System.setProperty("webdriver.chrome.driver", chromedriver_linux64);
         driver.manage().window().maximize();
         SignInLinkedInPage();
-        OpenProfileInformation();
+        OpenProfileInformation(filePath,fileSheet);
     }
     public static void SignInLinkedInPage() {
         common.openURL("https://www.linkedin.com/");
@@ -37,7 +38,7 @@ public class demo {
             e.printStackTrace();
         }
     }
-    public static void OpenProfileInformation() {
+    public static void OpenProfileInformation(String filePath,String fileSheet) {
         String prop_linkedInProfilePage = System.getProperty("user.dir") + "/src/automationPackage/Elements/linkedInProfilePage.properties";
         String e_lnkProfile = common.Read_Properties_Files(prop_linkedInProfilePage, "lnk_Profile");
         String e_lnkProfileConnections = common.Read_Properties_Files(prop_linkedInProfilePage, "lnk_ProfileConnections");
@@ -72,7 +73,7 @@ public class demo {
             for (int z=1;z<iTotalUser+1;z++)
             {
                 common.clickToElement("//ul[@class='reusable-search__entity-results-list list-style-none']//li["+z+"]//a[@class='app-aware-link']");
-                getUserInformation();
+                getUserInformation(filePath,fileSheet);
                 try {
                     Thread.sleep(4000);
                 } catch (InterruptedException e) {
@@ -90,24 +91,27 @@ public class demo {
             System.out.println("Click Next iteration : "+i);
         }
     }
-    public static void getUserInformation(){
+    public static void getUserInformation(String filePath,String fileSheet){
         String DisplayName="";
         String UserURL="";
         String UserMobile="";
         String UserEmail="";
-        String UserBirthday="";
         String UserConnected="";
         String UserUniversityName="";
         String UserUniversityYear="";
         String UserCurrentJob="";
         String UserCurrentCompany="";
+        String UserContactType="";
+        String UserContactNick="";
+        String UserSkill1="";
+        String UserSkill2="";
+        String UserSkill3="";
 
         String e_lnkSeemore= common.Read_Properties_Files(prop_linkedInProfilePage,"lnk_SeeMore");
         String e_lnk_UserURL=common.Read_Properties_Files(prop_linkedInProfilePage, "lnk_UserURL");
         String e_H1UserName=common.Read_Properties_Files(prop_linkedInProfilePage, "h1_NameOfUser");
         String e_SpanUserMobile=common.Read_Properties_Files(prop_linkedInProfilePage, "span_UserMobile");
         String e_lnk_Email=common.Read_Properties_Files(prop_linkedInProfilePage,"lnk_UserEmail");
-        String e_Span_BirthDay=common.Read_Properties_Files(prop_linkedInProfilePage,"span_UserBirthDay");
         String e_Span_Connected=common.Read_Properties_Files(prop_linkedInProfilePage,"span_UserConnected");
         String e_btn_Close=common.Read_Properties_Files(prop_linkedInProfilePage,"btn_Close");
         String e_span_Education_Name_Of_University=common.Read_Properties_Files(prop_linkedInProfilePage,"span_Education_Name_Of_University");
@@ -131,11 +135,6 @@ public class demo {
         if(common.isElementPresent(e_lnk_Email)==true)
         {
             UserEmail=common.getTextOfElement(e_lnk_Email);
-        }
-        else{}
-        if(common.isElementPresent(e_Span_BirthDay)==true)
-        {
-            UserBirthday=common.getTextOfElement(e_Span_BirthDay);
         }
         else{}
         if(common.isElementPresent(e_Span_Connected)==true)
@@ -172,9 +171,9 @@ public class demo {
             System.out.println(UserUniversityYear);
         }
         else{}
-        String[] UserInfor=new String[]{DisplayName,UserCurrentJob,UserCurrentCompany,UserURL,UserMobile,UserEmail,UserBirthday,UserConnected,UserUniversityName,UserUniversityYear};
+        String[] UserInfor=new String[]{DisplayName,UserCurrentJob,UserCurrentCompany,UserURL,UserMobile,UserEmail,UserUniversityName,UserUniversityYear,UserConnected};
         try {
-            common.writeDataIntoCSV(filePath,UserInfor);
+            common.writeExcel(filePath,fileSheet,UserInfor);
         } catch (IOException e) {
             e.printStackTrace();
         }

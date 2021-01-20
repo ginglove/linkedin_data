@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
@@ -8,14 +9,28 @@
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView blendMode="SCREEN" fitHeight="400.0" fitWidth="200.0" layoutX="-7.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView blendMode="DARKEN" fitHeight="400.0" fitWidth="207.0" layoutX="-7.0" layoutY="4.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../../../Downloads/fortio-logo-color.png" />
+               </image>
+               <effect>
+                  <Blend />
+               </effect></ImageView>
          </children>
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="txtPassword" prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnSubmit" layoutX="246.0" layoutY="270.0" mnemonicParsing="false" onAction="#pressButton" text="Submit" />
+            <Button fx:id="btnSubmit" layoutX="209.0" layoutY="259.0" mnemonicParsing="false" onAction="#pressButton" text="Submit" />
+            <Label fx:id="lb_Account" layoutX="40.0" layoutY="132.0" text="Account">
+               <effect>
+                  <Blend />
+               </effect>
+            </Label>
+            <Label layoutX="40.0" layoutY="164.0" text="Password" />
+            <PasswordField layoutX="105.0" layoutY="159.0" promptText="Input Pasword" />
+            <TextField fx:id="txtAccount" layoutX="105.0" layoutY="127.0" promptText="Input Account" />
          </children></AnchorPane>
    </right>
 </BorderPane>
