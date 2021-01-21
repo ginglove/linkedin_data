@@ -48,7 +48,7 @@ public class commons {
             WebDriverWait wait = new WebDriverWait(driver,30);
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(eXpath)));
             driver.findElement(By.xpath(eXpath)).sendKeys(txtInput);
-            System.out.println("Input into "+eXpath +"with string "+txtInput+ " successfully");
+//            System.out.println("Input into "+eXpath +"with string "+txtInput+ " successfully");
         }
         catch (ElementNotVisibleException e){
             System.err.println("No Element is Visible: "+e);
