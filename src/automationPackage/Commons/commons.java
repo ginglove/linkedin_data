@@ -126,15 +126,23 @@ public class commons {
         }
         return strTextOfElement;
     }
-    public void scrollToEndOfPage()
+    public void scrollToEndOfPage(Integer value)
     {
         try{
-            ((JavascriptExecutor)driver).executeScript("scroll(0,800)");
+            ((JavascriptExecutor)driver).executeScript("scroll(0,"+value+")");
         }
         catch(Exception e)
         {
             System.err.println("Cannot Scroll due to : "+e);
         }
+    }
+    public String getCurrentURL(){
+        String url="";
+        try{
+            url = driver.getCurrentUrl();
+        }
+        catch (Exception e){}
+        return url;
     }
     public boolean isElementIsVisible(String eXpath)
     {

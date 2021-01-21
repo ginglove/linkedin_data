@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView blendMode="DARKEN" fitHeight="400.0" fitWidth="207.0" layoutX="-7.0" layoutY="4.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../../../../Downloads/fortio-logo-color.png" />
+               </image>
+               <effect>
+                  <Blend />
+               </effect></ImageView>
+         </children>
+      </AnchorPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="200.0" prefWidth="400.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnSubmit" layoutX="88.0" layoutY="274.0" mnemonicParsing="false" onAction="#pressButton" prefHeight="34.0" prefWidth="206.0" text="Submit" />
+            <Label fx:id="lb_Account" layoutX="26.0" layoutY="103.0" text="Account">
+               <effect>
+                  <Blend />
+               </effect>
+            </Label>
+            <Label layoutX="26.0" layoutY="137.0" text="Password">
+               <effect>
+                  <Blend />
+               </effect></Label>
+            <PasswordField fx:id="txtPassword" layoutX="141.0" layoutY="132.0" prefHeight="26.0" prefWidth="198.0" promptText="Input Pasword" />
+            <TextField fx:id="txtAccount" layoutX="141.0" layoutY="98.0" prefHeight="26.0" prefWidth="198.0" promptText="Input Account" />
+            <Label fx:id="lbFilePath" layoutX="26.0" layoutY="173.0" text="FilePath">
+               <effect>
+                  <Blend />
+               </effect></Label>
+            <TextField fx:id="txtFilePath" layoutX="141.0" layoutY="168.0" prefHeight="26.0" prefWidth="198.0" promptText="Input Excel File Path" />
+            <TextField fx:id="txtFileSheet" layoutX="141.0" layoutY="200.0" prefHeight="26.0" prefWidth="198.0" promptText="Input Name of Excel Sheet" />
+            <Label layoutX="26.0" layoutY="205.0" text="FileSheet">
+               <effect>
+                  <Blend />
+               </effect></Label>
+            <Button fx:id="btnCancel" layoutX="87.0" layoutY="328.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="33.0" prefWidth="207.0" text="Cancel" />
+            <Label fx:id="labelSubmitButton" layoutX="120.0" layoutY="239.0">
+               <effect>
+                  <Lighting bumpInput="$null">
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+            </Label>
+         </children></AnchorPane>
+   </right>
+</BorderPane>
