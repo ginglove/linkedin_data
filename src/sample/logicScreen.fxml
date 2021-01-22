@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LogicController">
+   <children>
+      <AnchorPane prefHeight="85.0" prefWidth="750.0" style="-fx-background-color: #05E8FA;" />
+      <Label layoutX="56.0" layoutY="129.0" prefHeight="16.0" prefWidth="231.0" text="Total User Connection in Accounts">
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <Label layoutX="56.0" layoutY="172.0" text="Total Processing Data in Excel Files">
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <TextField fx:id="txtTotalConnections" layoutX="350.0" layoutY="124.0" />
+      <TextField fx:id="totalProcessData" layoutX="350.0" layoutY="167.0" />
+      <Button fx:id="btnClose" layoutX="416.0" layoutY="256.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" prefHeight="40.0" prefWidth="105.0" style="-fx-background-color: #05E8FA;" text="Close">
+         <effect>
+            <Blend />
+         </effect>
+      </Button>
+      <Button fx:id="btnGetLatest" layoutX="565.0" layoutY="124.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#getLatestInformationOnAction" prefHeight="72.0" prefWidth="97.0" style="-fx-background-color: #05E8FA;" text="Get Latest Information" wrapText="true">
+         <effect>
+            <Glow />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>

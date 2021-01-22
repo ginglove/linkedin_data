@@ -22,8 +22,15 @@ public class linkedInAction {
     }
     public static void LinkedInAction(commons common,String Account , String Password,String filePath,String fileSheet)
     {
-        SignInLinkedInPage(common,Account,Password);
-        OpenProfileInformation(common,filePath,fileSheet);
+        try {
+            SignInLinkedInPage(common, Account, Password);
+            OpenProfileInformation(common);
+            OpenUserConnection(common, filePath, fileSheet);
+        }
+        catch(Exception e)
+        {
+            common.quitBrowser();
+        }
     }
 
     public static void SignInLinkedInPage(commons common,String Account,String Password) {
@@ -41,16 +48,19 @@ public class linkedInAction {
             e.printStackTrace();
         }
     }
-    public static void OpenProfileInformation(commons common,String filePath,String fileSheet) {
+    public static void OpenProfileInformation(commons common)
+    {
         String prop_linkedInProfilePage = System.getProperty("user.dir") + "/src/automationPackage/Elements/linkedInProfilePage.properties";
         String e_lnkProfile = common.Read_Properties_Files(prop_linkedInProfilePage, "lnk_Profile");
         String e_lnkProfileConnections = common.Read_Properties_Files(prop_linkedInProfilePage, "lnk_ProfileConnections");
+        common.clickToElement(e_lnkProfile);
+        common.clickToElement(e_lnkProfileConnections);
+    }
+    public static void OpenUserConnection(commons common,String filePath,String fileSheet) {
+        String prop_linkedInProfilePage = System.getProperty("user.dir") + "/src/automationPackage/Elements/linkedInProfilePage.properties";
         String e_pgNumberOfConnections = common.Read_Properties_Files(prop_linkedInProfilePage, "pg_NumberOfConnections");
         String e_btnNext = common.Read_Properties_Files(prop_linkedInProfilePage, "btn_Next");
         String e_lsNumberConnection=common.Read_Properties_Files(prop_linkedInProfilePage, "li_UserConnection");
-
-        common.clickToElement(e_lnkProfile);
-        common.clickToElement(e_lnkProfileConnections);
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
