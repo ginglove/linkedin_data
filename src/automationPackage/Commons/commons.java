@@ -74,6 +74,23 @@ public class commons {
             System.err.println("Cannot input into Element due to: "+e);
         }
     }
+    public List<WebElement> findListElement(String eXpath){
+        List<WebElement> lsWebElement = null;
+        try{
+            WebDriverWait wait = new WebDriverWait(driver,30);
+            lsWebElement=driver.findElements(By.xpath(eXpath));
+            System.out.println("Click "+eXpath+" successfully");
+        }
+        catch (ElementNotVisibleException e){
+            System.err.println("No Element is Visible: "+e);
+        }
+        catch(Exception e)
+        {
+            System.err.println("Cannot input into Element due to: "+e);
+        }
+        return lsWebElement;
+    }
+
     public String Read_Properties_Files(String filePath, String proKey){
         String value="";
         try (InputStream input = new FileInputStream(filePath)) {
@@ -126,15 +143,46 @@ public class commons {
         }
         return strTextOfElement;
     }
-    public void scrollToEndOfPage(Integer value)
+    public void scrollDown(Integer value)
     {
         try{
             ((JavascriptExecutor)driver).executeScript("scroll(0,"+value+")");
         }
         catch(Exception e)
         {
+            System.err.println("Cannot Scroll Down due to : "+e);
+        }
+    }
+    public void scrollUp(Integer value)
+    {
+        try{
+            ((JavascriptExecutor)driver).executeScript("scroll(0,"+value+")");
+        }
+        catch(Exception e)
+        {
+            System.err.println("Cannot Scroll Up due to : "+e);
+        }
+    }
+    public void scrollToBottomOfPage()
+    {
+        try{
+            ((JavascriptExecutor)driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        }
+        catch(Exception e)
+        {
             System.err.println("Cannot Scroll due to : "+e);
         }
+    }
+    public String getCurrentScrollTop(){
+        String strScrollTop="";
+        try{
+            strScrollTop= (String) ((JavascriptExecutor)driver).executeScript("document.body.clientHeight");
+        }
+        catch(Exception e)
+        {
+            System.err.println("Cannot Scroll due to : "+e);
+        }
+        return strScrollTop;
     }
     public String getCurrentURL(){
         String url="";

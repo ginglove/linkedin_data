@@ -25,7 +25,8 @@ public class linkedInAction {
         try {
             SignInLinkedInPage(common, Account, Password);
             OpenProfileInformation(common);
-            OpenUserConnection(common, filePath, fileSheet);
+            //OpenUserNetwork(common, filePath, fileSheet);
+            OpenUserNetwork(common,filePath,fileSheet);
         }
         catch(Exception e)
         {
@@ -56,8 +57,70 @@ public class linkedInAction {
         common.clickToElement(e_lnkProfile);
         common.clickToElement(e_lnkProfileConnections);
     }
+    public static void OpenUserNetwork(commons common,String filePath,String fileSheet){
+        int iTotalElement=0;
+        String e_lnkProfile = common.Read_Properties_Files(prop_linkedInProfilePage, "lnk_Profile");
+        String e_MenuNetwork = common.Read_Properties_Files(prop_linkedInProfilePage, "menu_Network");
+        String e_MnConnection = common.Read_Properties_Files(prop_linkedInProfilePage, "mn_Connection");
+        String e_h1MyNetwork = common.Read_Properties_Files(prop_linkedInProfilePage, "h1_MyNetwork");
+        String e_liMyNetwork = common.Read_Properties_Files(prop_linkedInProfilePage, "li_MyNetwork");
+
+        common.clickToElement(e_lnkProfile);
+        common.clickToElement(e_MenuNetwork);
+        common.clickToElement(e_MnConnection);
+        String strMyNetwork=common.getTextOfElement(e_h1MyNetwork).substring(0,5);
+        strMyNetwork=strMyNetwork.replaceAll(",","");
+        int iTotalConnection= Integer.parseInt(strMyNetwork);
+        iTotalElement=common.findListElement(e_liMyNetwork).size();
+        String url=common.getCurrentURL();
+        for(int i=1;i<iTotalElement+1;i++)
+        {
+            if(i==iTotalElement){
+                common.scrollDown(500);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                common.scrollUp(-1000);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                common.scrollToBottomOfPage();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                common.scrollUp(-800);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                common.scrollDown(2400);
+                common.scrollDown(6500);
+                iTotalElement=common.findListElement(e_liMyNetwork).size();
+            }
+            else
+            {
+                System.out.println("Current Loop is "+i);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                common.clickToElement("//ul//li[@class='mn-connection-card artdeco-list ember-view']["+i+"]//a[@class='mn-connection-card__picture ember-view']");
+                getUserInformation(common,filePath,fileSheet);
+                common.openURL(url);
+            }
+        }
+
+        System.out.println("Total element is "+iTotalElement);
+    }
     public static void OpenUserConnection(commons common,String filePath,String fileSheet) {
-        String prop_linkedInProfilePage = System.getProperty("user.dir") + "/src/automationPackage/Elements/linkedInProfilePage.properties";
         String e_pgNumberOfConnections = common.Read_Properties_Files(prop_linkedInProfilePage, "pg_NumberOfConnections");
         String e_btnNext = common.Read_Properties_Files(prop_linkedInProfilePage, "btn_Next");
         String e_lsNumberConnection=common.Read_Properties_Files(prop_linkedInProfilePage, "li_UserConnection");
@@ -66,7 +129,7 @@ public class linkedInAction {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        common.scrollToEndOfPage(800);
+        common.scrollDown(800);
         int iNumberofList=common.numberOfListElement(e_pgNumberOfConnections);
         int iTotalPage= Integer.parseInt(common.getTextOfElement("//ul[@class='artdeco-pagination__pages artdeco-pagination__pages--number']//li["+iNumberofList+"]"));
         String url=common.getCurrentURL();
@@ -75,8 +138,8 @@ public class linkedInAction {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        common.scrollToEndOfPage(800);
-        for(int i=1;i<iTotalPage+1;i++)
+        common.scrollDown(800);
+        for(int i=56;i<iTotalPage+1;i++)
         {
             if(i==1){}
             else{
@@ -90,8 +153,8 @@ public class linkedInAction {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                common.scrollToEndOfPage(-800);
-                common.clickToElement("//ul[@class='reusable-search__entity-results-list list-style-none']//li["+z+"]//a[@class='app-aware-link']");
+                common.scrollUp(-800);
+                common.clickToElement("//ul//li[@class='mn-connection-card artdeco-list ember-view']["+i+"]//a[@class='mn-connection-card__picture ember-view']");
                 getUserInformation(common,filePath,fileSheet);
                 try {
                     Thread.sleep(4000);
@@ -105,7 +168,7 @@ public class linkedInAction {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            common.scrollToEndOfPage(800);
+            common.scrollDown(800);
             common.clickToElement(e_btnNext);
             System.out.println("Click Next iteration : "+i);
         }
@@ -186,7 +249,7 @@ public class linkedInAction {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        common.scrollToEndOfPage(1300);
+        common.scrollDown(1300);
         if(common.isElementPresent(e_span_Current_Job)==true)
         {
             UserCurrentJob=common.getTextOfElement(e_span_Current_Job);
@@ -202,7 +265,7 @@ public class linkedInAction {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        common.scrollToEndOfPage(1300);
+        common.scrollDown(1300);
         if(common.isElementPresent(e_span_Education_Name_Of_University)==true)
         {
             UserUniversityName=common.getTextOfElement(e_span_Education_Name_Of_University);
@@ -214,7 +277,7 @@ public class linkedInAction {
         }
         else{}
 
-        common.scrollToEndOfPage(1300);
+        common.scrollDown(1300);
         if(common.isElementPresent(e_span_UserSkill1)==true)
         {
             UserSkill1=common.getTextOfElement(e_span_UserSkill1);

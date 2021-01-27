@@ -45,44 +45,58 @@ public class Controller implements Initializable {
 
     public void pressButton(ActionEvent event)
     {
-        try {
-            if (txtAccount.getText().isBlank() == true) {
-                labelSubmitButton.setText("Please Input Account");
-            } else if (txtPassword.getText().isBlank() == true) {
-                labelSubmitButton.setText("Please Input Password");
-            } else if (txtFilePath.getText().isBlank() == true) {
-                labelSubmitButton.setText("Please Input Excel File Path");
-            } else if (txtFileSheet.getText().isBlank() == true) {
-                labelSubmitButton.setText("Please Input Excel File Sheet Name");
-            } else if (txtAccount.getText().isBlank() == true && txtPassword.getText().isBlank() == true && txtFilePath.getText().isBlank() == true && txtFileSheet.getText().isBlank() == true) {
-                labelSubmitButton.setText("Please Input All Value");
-            } else {
-                Stage stage=(Stage) btnCancel.getScene().getWindow();
-                stage.close();
-                logicScreenForm();
-                String chromedriver_linux64=System.getProperty("user.dir")+"/Addons/chromedriver_linux64/chromedriver";
-                System.setProperty("webdriver.chrome.driver", chromedriver_linux64);
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--headless");
-                options.addArguments("--disable-gpu");
-                options.addArguments("--window-size=1920,1080");
-                WebDriver driver = new ChromeDriver(options);
-                commons common =new commons(driver);
-                linkedInAction test=new linkedInAction();
-                String Account =txtAccount.getText();
-                String Password=txtPassword.getText();
-                String filePath=txtFilePath.getText();
-                String fileSheet=txtFileSheet.getText();
+//        try {
+//            if (txtAccount.getText().isBlank() == true) {
+//                labelSubmitButton.setText("Please Input Account");
+//            } else if (txtPassword.getText().isBlank() == true) {
+//                labelSubmitButton.setText("Please Input Password");
+//            } else if (txtFilePath.getText().isBlank() == true) {
+//                labelSubmitButton.setText("Please Input Excel File Path");
+//            } else if (txtFileSheet.getText().isBlank() == true) {
+//                labelSubmitButton.setText("Please Input Excel File Sheet Name");
+//            } else if (txtAccount.getText().isBlank() == true && txtPassword.getText().isBlank() == true && txtFilePath.getText().isBlank() == true && txtFileSheet.getText().isBlank() == true) {
+//                labelSubmitButton.setText("Please Input All Value");
+//            } else {
+//                String chromedriver_linux64=System.getProperty("user.dir")+"/Addons/chromedriver_linux64/chromedriver";
+//                System.setProperty("webdriver.chrome.driver", chromedriver_linux64);
+//                ChromeOptions options = new ChromeOptions();
+//                options.addArguments("--headless");
+//                options.addArguments("--disable-gpu");
+//                options.addArguments("--window-size=1920,1080");
+//                WebDriver driver = new ChromeDriver(options);
+//                commons common =new commons(driver);
+//                linkedInAction test=new linkedInAction();
+//                String Account =txtAccount.getText();
+//                String Password=txtPassword.getText();
+//                String filePath=txtFilePath.getText();
+//                String fileSheet=txtFileSheet.getText();
 //                linkedInAction.SignInLinkedInPage(common, Account, Password);
 //                linkedInAction.OpenProfileInformation(common);
 //                linkedInAction.OpenUserConnection(common, filePath, fileSheet);
-            }
-        }
-        catch(Exception e)
-        {
-            Stage stage=(Stage) btnCancel.getScene().getWindow();
-            stage.close();
-        }
+//            }
+//        }
+//        catch(Exception e)
+//        {
+//            Stage stage=(Stage) btnCancel.getScene().getWindow();
+//            stage.close();
+//        }
+        String chromedriver_linux64=System.getProperty("user.dir")+"/Addons/chromedriver_linux64/chromedriver";
+        System.setProperty("webdriver.chrome.driver", chromedriver_linux64);
+        ChromeOptions options = new ChromeOptions();
+        //options.addArguments("--headless");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--window-size=1920,1080");
+        WebDriver driver = new ChromeDriver(options);
+        commons common =new commons(driver);
+        linkedInAction test=new linkedInAction();
+        String Account =txtAccount.getText();
+        String Password=txtPassword.getText();
+        String filePath=txtFilePath.getText();
+        String fileSheet=txtFileSheet.getText();
+        linkedInAction.SignInLinkedInPage(common, Account, Password);
+        //linkedInAction.OpenProfileInformation(common);
+        //linkedInAction.OpenUserConnection(common, filePath, fileSheet);
+        linkedInAction.OpenUserNetwork(common,filePath,fileSheet);
     }
     public void cancelButtonOnAction(ActionEvent event){
         Stage stage=(Stage) btnCancel.getScene().getWindow();
