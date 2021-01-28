@@ -6,6 +6,7 @@ import org.openqa.selenium.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -18,6 +19,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.opencsv.CSVWriter;
@@ -161,6 +163,44 @@ public class commons {
         catch(Exception e)
         {
             System.err.println("Cannot Scroll Up due to : "+e);
+        }
+    }
+    public void closeCurrentWindows()
+    {
+        try{
+            driver.close();
+        }
+        catch(Exception e){
+            System.out.println("Cannot close current Windows due to : "+e);
+        }
+    }
+    public void switchToMainWindow()
+    {
+        try{
+            ArrayList<String> tab = new ArrayList<>(driver.getWindowHandles());
+            driver.switchTo().window(tab.get(0));
+        }
+        catch(Exception e){
+            System.out.println("Cannot switch to Main Window due to : "+e);
+        }
+    }
+    public void rightClickAndOpenURLInNewTab(String eXpath){
+        try {
+            WebElement link = driver.findElement(By.xpath(eXpath));
+            Actions actions = new Actions(driver);
+
+            actions.keyDown(Keys.LEFT_CONTROL)
+                    .click(link)
+                    .keyUp(Keys.LEFT_CONTROL)
+                    .build()
+                    .perform();
+
+            ArrayList<String> tab = new ArrayList<>(driver.getWindowHandles());
+            driver.switchTo().window(tab.get(1));
+        }
+        catch(Exception e)
+        {
+            System.out.println("Cannot open right click and open URL in new tab due to : "+e);
         }
     }
     public void scrollToBottomOfPage()

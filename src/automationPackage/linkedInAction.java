@@ -90,7 +90,7 @@ public class linkedInAction {
                 }
                 common.scrollToBottomOfPage();
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -102,19 +102,36 @@ public class linkedInAction {
                 }
                 common.scrollDown(2400);
                 common.scrollDown(6500);
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 iTotalElement=common.findListElement(e_liMyNetwork).size();
             }
             else
             {
                 System.out.println("Current Loop is "+i);
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if(i>100)
+                {
+                    try {
+                        Thread.sleep(10000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
-                common.clickToElement("//ul//li[@class='mn-connection-card artdeco-list ember-view']["+i+"]//a[@class='mn-connection-card__picture ember-view']");
+                else
+                {
+                    try {
+                        Thread.sleep(4000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                common.rightClickAndOpenURLInNewTab("//ul//li[@class='mn-connection-card artdeco-list ember-view']["+i+"]//a[@class='mn-connection-card__picture ember-view']");
                 getUserInformation(common,filePath,fileSheet);
-                common.openURL(url);
+                common.closeCurrentWindows();
+                common.switchToMainWindow();
             }
         }
 
